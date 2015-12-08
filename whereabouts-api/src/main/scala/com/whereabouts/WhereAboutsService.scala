@@ -1,13 +1,16 @@
 package com.whereabouts
 
-import akka.actor.Actor
+import akka.actor.{ActorLogging, Actor}
+import akka.event.LoggingAdapter
+import org.slf4j.Logger
 import spray.routing._
 import spray.http._
 import MediaTypes._
+import spray.util.SprayActorLogging
 
 // we don't implement our route structure directly in the service actor because
 // we want to be able to test it independently, without having to spin up an actor
-class WhereAboutsServiceActor extends Actor with WhereAboutsService {
+class WhereAboutsServiceActor extends Actor with WhereAboutsService  {
 
   // the HttpService trait defines only one abstract member, which
   // connects the services environment to the enclosing actor or test
@@ -41,6 +44,8 @@ trait WhereAboutsService extends HttpService {
   path("show"){
     get {
       respondWithMediaType(`text/html`) { // XML is marshalled to `text/xml` by default, so we simply override here
+
+
         complete {
           <html>
             <body>

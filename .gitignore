@@ -1,3 +1,4 @@
+/.history
 /.idea/
 /project/boot/
 /project/plugins/project
@@ -6,5 +7,6 @@ lib_managed/
 src_managed/
 test-output/
 *.iml
+logs/
 .classpath_nb
 .DS_Store
