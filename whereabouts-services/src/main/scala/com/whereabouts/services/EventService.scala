@@ -8,9 +8,10 @@ trait EventService {
 
 }
 
-class EventServiceImpl extends EventService{
+class FakeEventService extends EventService{
 
   //Logger logger = LoggerFactory.getLogger(HelloWorld.class);
+
 
   def store(se:StoreEvent):Unit = {
 

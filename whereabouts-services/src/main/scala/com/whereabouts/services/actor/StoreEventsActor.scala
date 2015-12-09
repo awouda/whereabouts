@@ -1,13 +1,12 @@
 package com.whereabouts.services.actor
 
 import akka.actor.Actor
-import akka.actor.Actor.Receive
-import com.whereabouts.messages.{StoreEvent, StoreEventMsg}
-import com.whereabouts.services.{EventServiceImpl, EventService}
+import com.whereabouts.messages.{ StoreEventMsg}
+import com.whereabouts.services.{FakeEventService, EventService}
 
 class StoreEventsActor extends Actor {
 
-  val eventService:EventService = new EventServiceImpl()
+  val eventService:EventService = new FakeEventService()
   override def receive: Receive = {
     case StoreEventMsg(se) => eventService.store(se)
   }
