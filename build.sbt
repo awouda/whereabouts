@@ -30,7 +30,7 @@ lazy val sprayDependencies = Seq(
   "io.spray" %% "spray-testkit" % sprayV % "test"
 )
 
-lazy val loggers = Seq(
+lazy val logDependencies = Seq(
   "ch.qos.logback" % "logback-core" % "1.1.2",
   "ch.qos.logback" % "logback-classic" % "1.1.2"
 )
@@ -41,7 +41,7 @@ lazy val loggers = Seq(
 lazy val whereaboutsApi = project
   .in(file("whereabouts-api"))
   .settings(commonSettings: _*)
-  .settings(libraryDependencies ++= testDependencies)
+  .settings(libraryDependencies ++= (testDependencies ++ akkaDependencies ++ sprayDependencies ++ logDependencies))
   .dependsOn(whereaboutsMessages, whereaboutsServices)
 
 lazy val whereaboutsMessages = project
