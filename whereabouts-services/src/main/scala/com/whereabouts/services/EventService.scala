@@ -15,6 +15,9 @@ class EventServiceImpl extends EventService{
   def store(se:StoreEvent):Unit = {
 
 
+    println(" storing "+se)
+
+
 
 
 

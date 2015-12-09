@@ -9,7 +9,6 @@ lazy val commonSettings = Seq(
 
 )
 
-
 lazy val akkaV = "2.3.9"
 lazy val sprayV = "1.3.3"
 
@@ -36,8 +35,6 @@ lazy val logDependencies = Seq(
 )
 
 
-
-
 lazy val whereaboutsApi = project
   .in(file("whereabouts-api"))
   .settings(commonSettings: _*)
@@ -50,7 +47,9 @@ lazy val whereaboutsMessages = project
 
 lazy val whereaboutsServices = project
   .in(file("whereabouts-services"))
-  .settings(commonSettings: _*).dependsOn(whereaboutsMessages)
+  .settings(commonSettings: _*)
+  .settings(libraryDependencies ++= (testDependencies ++ akkaDependencies ++  logDependencies))
+  .dependsOn(whereaboutsMessages)
 
 
 
