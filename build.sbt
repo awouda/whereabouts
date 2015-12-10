@@ -9,6 +9,10 @@ def WhereaboutsProject(name: String): Project =
     scalacOptions := Seq("-unchecked", "-deprecation", "-encoding", "utf8")
   )
 
+
+packAutoSettings
+
+
 lazy val akkaV = "2.3.9"
 lazy val sprayV = "1.3.3"
 
@@ -36,7 +40,7 @@ lazy val logDependencies = Seq(
 
 lazy val whereaboutsApi = WhereaboutsProject("whereabouts-api")
   .settings(libraryDependencies ++= (testDependencies ++ akkaDependencies ++ sprayDependencies ++ logDependencies))
-  .dependsOn(whereaboutsMessages, whereaboutsSe rvices)
+  .dependsOn(whereaboutsMessages, whereaboutsServices)
 
 lazy val whereaboutsMessages = WhereaboutsProject("whereabouts-messages")
 
