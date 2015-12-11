@@ -51,7 +51,7 @@ trait WhereAboutsService extends HttpService {
           respondWithMediaType(`text/html`) {
             complete {
               val storeEventsActor = actorRefFactory.actorOf(Props(new StoreEventsActor))
-              val future = storeEventsActor ? StoreEventMsg(new StoreEvent(new java.util.Date().toString))
+              val future = storeEventsActor ? StoreEventMsg( StoreEvent(new java.util.Date().toString))
               future.mapTo[String]
             }
           }
@@ -61,7 +61,7 @@ trait WhereAboutsService extends HttpService {
         get {
           complete {
             actorRefFactory.actorOf(Props(new StoreEventsActor))
-              .ask(StoreEventMsg(new StoreEvent(new java.util.Date().toString)))
+              .ask(StoreEventMsg(  StoreEvent(new java.util.Date().toString)))
               .mapTo[String]
           }
         }
