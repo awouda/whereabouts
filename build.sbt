@@ -1,5 +1,7 @@
 name := "whereabouts"
 
+enablePlugins(GatlingPlugin)
+
 def WhereaboutsProject(name: String): Project =
   Project(name, file(name)).settings(
     version := "0.1.0",
@@ -37,12 +39,24 @@ lazy val logDependencies = Seq(
   "ch.qos.logback" % "logback-classic" % "1.1.2"
 )
 
+
+lazy val gatlingDependencies = Seq(
+  "io.gatling.highcharts" % "gatling-charts-highcharts" % "2.1.5" % "test",
+  "io.gatling" % "gatling-test-framework" % "2.1.5" % "test"
+)
+
+
 lazy val whereaboutsApi = WhereaboutsProject("whereabouts-api")
-  .settings(libraryDependencies ++= (testDependencies ++ akkaDependencies ++ sprayDependencies ++ logDependencies))
+  .settings(libraryDependencies ++= (
+    testDependencies ++
+      akkaDependencies ++
+      sprayDependencies ++
+      logDependencies ++
+      gatlingDependencies))
   .dependsOn(whereaboutsMessages, whereaboutsServices)
 
 lazy val whereaboutsMessages = WhereaboutsProject("whereabouts-messages")
 
 lazy val whereaboutsServices = WhereaboutsProject("whereabouts-services")
-  .settings(libraryDependencies ++= (   akkaDependencies ++  logDependencies))
+  .settings(libraryDependencies ++= (akkaDependencies ++ logDependencies))
   .dependsOn(whereaboutsMessages)

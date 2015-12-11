@@ -48,14 +48,12 @@ trait WhereAboutsService extends HttpService {
     } ~
       path("show") {
         get {
-          respondWithMediaType(`text/html`) {
             complete {
-              val storeEventsActor = actorRefFactory.actorOf(Props(new StoreEventsActor))
+              val storeEventsActor = actorRefFactory.actorOf(Props(new StoreEventsActor),"nr-"+System.nanoTime())
               val future = storeEventsActor ? StoreEventMsg( StoreEvent(new java.util.Date().toString))
               future.mapTo[String]
             }
           }
-        }
       } ~
       path("test") {
         get {

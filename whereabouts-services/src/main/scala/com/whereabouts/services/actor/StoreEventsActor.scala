@@ -6,9 +6,10 @@ import com.whereabouts.services.{FakeEventService, EventService}
 
 class StoreEventsActor extends Actor with ActorLogging {
 
-  log.info("instantiated actor")
+  log.info("instantiated actor"+self.path.name)
 
   val eventService:EventService = new FakeEventService()
+
   override def receive: Receive = {
 
     case StoreEventMsg(se) =>

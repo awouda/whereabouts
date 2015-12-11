@@ -1,5 +1,6 @@
 package com.whereabouts.services
 
+import akka.event.slf4j.SLF4JLogging
 import com.whereabouts.messages.StoreEvent
 
 trait EventService {
@@ -8,15 +9,11 @@ trait EventService {
 
 }
 
-class FakeEventService extends EventService{
-
-  //Logger logger = LoggerFactory.getLogger(HelloWorld.class);
-
+class FakeEventService extends EventService  with SLF4JLogging {
 
   def store(se:StoreEvent):Unit = {
 
-
-    println(" storing "+se)
+    log.info(s"Yeah logging stuff ${se} ")
 
 
 
