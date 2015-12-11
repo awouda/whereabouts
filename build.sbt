@@ -12,7 +12,6 @@ def WhereaboutsProject(name: String): Project =
 
 packAutoSettings
 
-
 lazy val akkaV = "2.3.9"
 lazy val sprayV = "1.3.3"
 
