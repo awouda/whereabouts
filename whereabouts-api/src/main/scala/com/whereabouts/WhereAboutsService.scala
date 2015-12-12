@@ -12,6 +12,8 @@ import MediaTypes._
 import spray.util.SprayActorLogging
 import scala.concurrent.duration._
 import akka.pattern.ask
+import com.whereabouts.marshaller.StoreEventSupport._
+
 
 class WhereAboutsServiceActor extends Actor with WhereAboutsService {
 
@@ -61,6 +63,13 @@ trait WhereAboutsService extends HttpService {
             actorRefFactory.actorOf(Props(new StoreEventsActor))
               .ask(StoreEventMsg(  StoreEvent(new java.util.Date().toString)))
               .mapTo[String]
+          }
+        }
+      } ~
+      path("update") {
+        post {  
+          entity(as[StoreEvent]) { storeEvent =>
+            complete(s"Event: ${storeEvent.data}")
           }
         }
       }

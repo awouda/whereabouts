@@ -1,7 +1,5 @@
 name := "whereabouts"
 
-enablePlugins(GatlingPlugin)
-
 def WhereaboutsProject(name: String): Project =
   Project(name, file(name)).settings(
     version := "0.1.0",
@@ -12,6 +10,7 @@ def WhereaboutsProject(name: String): Project =
   )
 
 
+// enables the sbt-pack "pack" command to generate a distribution
 packAutoSettings
 
 lazy val akkaV = "2.3.9"
@@ -31,7 +30,8 @@ lazy val akkaDependencies = Seq(
 lazy val sprayDependencies = Seq(
   "io.spray" %% "spray-can" % sprayV,
   "io.spray" %% "spray-routing" % sprayV,
-  "io.spray" %% "spray-testkit" % sprayV % "test"
+  "io.spray" %% "spray-testkit" % sprayV % "test",
+  "io.spray" %% "spray-json" % "1.3.2"
 )
 
 lazy val logDependencies = Seq(
