@@ -36,14 +36,11 @@ trait WhereAboutsService extends HttpService {
   val myRoute =
     path("") {
       get {
-        respondWithMediaType(`text/html`) {
+        respondWithMediaType(`application/json`) {
           complete {
-            <html>
-              <body>
-                <h1>Whereabouts API</h1>
-              </body>
-            </html>
-          }
+             inventoryList
+
+           }
         }
       }
     } ~
