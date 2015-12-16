@@ -5,7 +5,7 @@ def WhereaboutsProject(name: String): Project =
     version := "0.1.0",
     organization := "com.whereabouts",
     fork in Test := true,
-    scalaVersion := "2.11.6",
+    scalaVersion := "2.11.7",
     scalacOptions := Seq("-unchecked", "-deprecation", "-encoding", "utf8")
   )
 
@@ -13,7 +13,7 @@ def WhereaboutsProject(name: String): Project =
 // enables the sbt-pack "pack" command to generate a distribution
 packAutoSettings
 
-lazy val akkaV = "2.3.9"
+lazy val akkaV = "2.4.0"
 lazy val sprayV = "1.3.3"
 
 lazy val testDependencies = Seq(
@@ -45,6 +45,10 @@ lazy val gatlingDependencies = Seq(
   "io.gatling" % "gatling-test-framework" % "2.1.5" % "test"
 )
 
+lazy val apiDependencies = Seq("org.json4s" %% "json4s-jackson" % "3.3.0"
+)
+
+
 
 lazy val whereaboutsApi = WhereaboutsProject("whereabouts-api")
   .settings(libraryDependencies ++= (
@@ -52,6 +56,7 @@ lazy val whereaboutsApi = WhereaboutsProject("whereabouts-api")
       akkaDependencies ++
       sprayDependencies ++
       logDependencies ++
+      apiDependencies ++
       gatlingDependencies))
   .dependsOn(whereaboutsMessages, whereaboutsServices)
 

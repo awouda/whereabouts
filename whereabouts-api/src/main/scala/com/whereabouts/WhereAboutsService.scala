@@ -1,18 +1,15 @@
 package com.whereabouts
 
-import akka.actor.{Props, ActorLogging, Actor}
-import akka.event.LoggingAdapter
+import akka.actor.{Props, Actor}
 import akka.util.Timeout
 import com.whereabouts.messages.{StoreEvent, StoreEventMsg}
 import com.whereabouts.services.actor.StoreEventsActor
-import org.slf4j.Logger
 import spray.routing._
 import spray.http._
 import MediaTypes._
-import spray.util.SprayActorLogging
 import scala.concurrent.duration._
 import akka.pattern.ask
-import com.whereabouts.marshaller.StoreEventSupport._
+import com.whereabouts.marshaller.Json4sProtocol._
 
 
 class WhereAboutsServiceActor extends Actor with WhereAboutsService {
@@ -22,10 +19,12 @@ class WhereAboutsServiceActor extends Actor with WhereAboutsService {
   def receive = runRoute(myRoute)
 }
 
+
+case class Person(age:Int, name:String)
+case class PersonMap(persons:Map[String,List[Person]])
+
+
 trait WhereAboutsService extends HttpService {
-
-
-
 
   implicit def executionContext = actorRefFactory.dispatcher
 
@@ -66,9 +65,11 @@ trait WhereAboutsService extends HttpService {
           }
         }
       } ~
-      path("update") {
-        post {  
+      path("update")  {
+        post {
+
           entity(as[StoreEvent]) { storeEvent =>
+
             complete(s"Event: ${storeEvent.data}")
           }
         }
